@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route Component={DefaultLayout}>
             <Route index Component={HomePage} />
-            <Route path="/about" Component={AboutUsPage} />
+            <Route path="/aboutUs" Component={AboutUsPage} />
             <Route path="/postList" Component={PostListPage} />
           </Route>
         </Routes>

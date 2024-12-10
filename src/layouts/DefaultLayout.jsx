@@ -7,11 +7,11 @@ import Footer from "../components/layout/Footer";
 export default function DefaultLayout() {
   return (
     <>
-      <Header></Header>
-      <Main>
+      <div className="wrapper">
+        <Header></Header>
         <Outlet></Outlet>
-      </Main>
-      <Footer></Footer>
+        <Footer></Footer>
+      </div>
     </>
   );
 }

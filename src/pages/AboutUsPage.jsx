@@ -1,6 +1,6 @@
-export default function HomePage() {
+export default function AboutUsPage() {
   return (
-    <div>
+    <div className="container pt-3">
       <h2>About Us</h2>
     </div>
   );
