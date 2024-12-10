@@ -10,7 +10,7 @@ import * as bootstrap from "bootstrap";
 import "./assets/css/index.css";
 
 //* import application component
-import App from "./components/App";
+import App from "./App";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
