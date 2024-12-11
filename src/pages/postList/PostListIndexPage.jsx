@@ -42,7 +42,11 @@ export default function PostListPage() {
             {postList.map((post) => (
               <tr key={post.id}>
                 <td>
-                  <img src={backendPath + post.image} width="80" />
+                  <img
+                    src={backendPath + post.image}
+                    className="rounded"
+                    width="80"
+                  />
                 </td>
                 <td>{post.title}</td>
                 <td>{post.author}</td>
@@ -51,17 +55,28 @@ export default function PostListPage() {
                   {post.isPublished ? (
                     <span className="badge text-bg-success">Pubblicato</span>
                   ) : (
-                    <span className="badge text-bg-danger">Non pubblicato</span>
+                    <span className="badge text-bg-warning">
+                      Non pubblicato
+                    </span>
                   )}
                 </td>
                 <td>
                   <button
                     onClick={() => goToPage(`/postList/${post.id}`)}
                     type="button"
+                    className="btn btn-outline-secondary me-1"
+                  >
+                    <i className="fa-regular fa-eye fa-sm"></i>
+                  </button>
+
+                  <button
+                    onClick={() => {}}
+                    type="button"
                     className="btn btn-success me-1"
                   >
                     <i className="fa-solid fa-pen fa-sm"></i>
                   </button>
+
                   <button type="button" className="btn btn-danger me-1">
                     <i className="fa-solid fa-trash fa-sm"></i>
                   </button>

@@ -35,29 +35,42 @@ export default function PostListShowPage() {
             Indietro
           </button>
         </div>
-        <div>
-          <div className="card my-3">
-            <div className="row g-0">
-              <div className="col-md-4">
-                <img
-                  src={backendPath + postSelected.image}
-                  className="img-fluid rounded-start"
-                />
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">{postSelected.title}</h5>
-                  <small className="text-body-secondary">
-                    {postSelected.author}
-                  </small>
-                  <p className="card-text">{postSelected.content}</p>
+        <div className="card my-3">
+          <div className="row g-0">
+            <div className="col-md-4">
+              <img
+                src={backendPath + postSelected.image}
+                className="img-fluid rounded-start"
+              />
+            </div>
+            <div className="col-md-8">
+              <div className="card-body">
+                <h5 className="card-title">
+                  {postSelected.title}
+                  <span className="badge text-bg-primary ms-2">
+                    {postSelected.category}
+                  </span>
+                </h5>
+                <small className="text-body-secondary">
+                  {postSelected.author}
+                </small>
+                <p className="card-text">{postSelected.content}</p>
 
-                  {/*                   <div>
+                {/*                   <div>
                     {postSelected.map((tag) => (
                       <div>{tag}</div>
                     ))}
                   </div> */}
-                </div>
+
+                {postSelected.isPublished ? (
+                  <span className="badge text-bg-success position-absolute top-0 start-0 py-2">
+                    Pubblicato
+                  </span>
+                ) : (
+                  <span className="badge text-bg-warning position-absolute top-0 start-0 py-2">
+                    Non pubblicato
+                  </span>
+                )}
               </div>
             </div>
           </div>
