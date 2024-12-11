@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import AboutUsPage from "./pages/AboutUsPage";
 import PostListIndexPage from "./pages/postList/PostListIndexPage";
 import PostListShowPage from "./pages/postList/PostListShowPage";
+import PostListPostPage from "./pages/postList/PostListPostPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/postList">
               <Route index Component={PostListIndexPage} />
               <Route path=":id" Component={PostListShowPage} />
+              <Route path="addPost" Component={PostListPostPage} />
             </Route>
           </Route>
         </Routes>
