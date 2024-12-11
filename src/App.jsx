@@ -15,7 +15,10 @@ function App() {
           <Route Component={DefaultLayout}>
             <Route index Component={HomePage} />
             <Route path="/aboutUs" Component={AboutUsPage} />
-            <Route path="/postList" Component={PostListPage} />
+          </Route>
+
+          <Route path="/postList" Component={DefaultLayout}>
+            <Route index Component={PostListPage} />
           </Route>
         </Routes>
       </BrowserRouter>
