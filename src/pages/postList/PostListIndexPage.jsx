@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { data, useNavigate } from "react-router";
 
 export default function PostListPage() {
   const backendPath = import.meta.env.VITE_BACKEND_URL;
@@ -18,6 +18,16 @@ export default function PostListPage() {
         const { newPostList } = data;
 
         setPostList(newPostList);
+      });
+  };
+
+  // fetch for delete a post
+  const fetchDeletePost = (id) => {
+    fetch(`${backendPostListPath}/${id}`, { method: "DELETE" })
+      .then((res) => res.json())
+      .then((data) => {
+        const { posts } = data;
+        setPostList(posts);
       });
   };
 
@@ -61,6 +71,7 @@ export default function PostListPage() {
                   )}
                 </td>
                 <td>
+                  {/* show post button */}
                   <button
                     onClick={() => goToPage(`/postList/${post.id}`)}
                     type="button"
@@ -69,6 +80,7 @@ export default function PostListPage() {
                     <i className="fa-regular fa-eye fa-sm"></i>
                   </button>
 
+                  {/* modify post button */}
                   <button
                     onClick={() => {}}
                     type="button"
@@ -77,9 +89,64 @@ export default function PostListPage() {
                     <i className="fa-solid fa-pen fa-sm"></i>
                   </button>
 
-                  <button type="button" className="btn btn-danger me-1">
+                  {/* delete post button */}
+                  <button
+                    type="button"
+                    className="btn btn-danger me-1"
+                    data-bs-toggle="modal"
+                    data-bs-target={`#deleteModal${post.id}`}
+                  >
                     <i className="fa-solid fa-trash fa-sm"></i>
                   </button>
+
+                  {/* modal for delete post */}
+                  <div
+                    className="modal fade"
+                    id={`deleteModal${post.id}`}
+                    tabIndex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div className="modal-dialog modal-dialog-centered">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h1
+                            className="modal-title fs-5"
+                            id={`deleteModal${post.id}`}
+                          >
+                            Eliminazione Post: {post.title}
+                          </h1>
+                          <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div className="modal-body">
+                          Stai per eliminare il post "{post.title}". Vuoi
+                          proseguire?
+                        </div>
+                        <div className="modal-footer">
+                          <button
+                            type="button"
+                            className="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Annulla
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => fetchDeletePost(post.id)}
+                            className="btn btn-danger"
+                            data-bs-dismiss="modal"
+                          >
+                            Elimina
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </td>
               </tr>
             ))}

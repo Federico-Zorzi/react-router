@@ -26,7 +26,10 @@ export default function PostListShowPage() {
     <main>
       <div className="container ">
         <div className="d-flex justify-content-between pt-3">
+          {/* page title */}
           <h3>{postSelected.title}</h3>
+
+          {/* back to previous page btn */}
           <button
             onClick={() => goToPage(-1)}
             type="button"
@@ -35,6 +38,8 @@ export default function PostListShowPage() {
             Indietro
           </button>
         </div>
+
+        {/* card visualization post */}
         <div className="card my-3">
           <div className="row g-0">
             <div className="col-md-4">
