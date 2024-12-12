@@ -14,7 +14,15 @@ export default function PostListShowPage() {
 
   const fetchShowPost = () => {
     fetch(`${backendPostListPath}/${id}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          if (res.status === 404) {
+            goToPage("/notFound");
+          }
+          throw new Error("Qualcosa è andato storto");
+        }
+        return res.json();
+      })
       .then((data) => {
         setPostSelected(data);
       });
@@ -22,9 +30,11 @@ export default function PostListShowPage() {
 
   useEffect(fetchShowPost, []);
 
+  console.log(postSelected.tags);
+
   return (
     <main>
-      <div className="container ">
+      <div className="container">
         <div className="d-flex justify-content-between pt-3">
           {/* page title */}
           <h3>{postSelected.title}</h3>
@@ -61,11 +71,15 @@ export default function PostListShowPage() {
                 </small>
                 <p className="card-text">{postSelected.content}</p>
 
-                {/*                   <div>
-                    {postSelected.map((tag) => (
-                      <div>{tag}</div>
-                    ))}
-                  </div> */}
+                {postSelected.tags && Array.isArray(postSelected.tags) ? (
+                  postSelected.tags.map((tag, index) => (
+                    <span key={index} className="badge bg-secondary me-1">
+                      #{tag}
+                    </span>
+                  ))
+                ) : (
+                  <p>No tags available.</p>
+                )}
 
                 {postSelected.isPublished ? (
                   <span className="badge text-bg-success position-absolute top-0 start-0 py-2">

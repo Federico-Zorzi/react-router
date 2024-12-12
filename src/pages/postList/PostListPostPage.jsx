@@ -1,7 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import { categories } from "../../assets/data/postCategories";
 
 export default function PostListPostPage(updatePosts) {
   const backendPath = import.meta.env.VITE_BACKEND_URL;
@@ -13,7 +11,7 @@ export default function PostListPostPage(updatePosts) {
     content: "",
     author: "",
     image: "",
-    category: "Economia e Business",
+    category: "",
     isPublished: false,
     tags: [],
   };
@@ -21,6 +19,7 @@ export default function PostListPostPage(updatePosts) {
   const [newPostListUpdated, setNewPostListUpdated] = useState(defaultPost);
 
   const [formData, setformData] = useState(defaultPost);
+  const [categoriesList, setCategoriesList] = useState([]);
 
   const goToPage = useNavigate();
 
@@ -38,6 +37,17 @@ export default function PostListPostPage(updatePosts) {
 
     setformData({ ...formData, tags: newTags });
   };
+
+  /* fetch for categories list*/
+  const fetchPostCategories = () => {
+    fetch(backendPostListPath)
+      .then((res) => res.json())
+      .then((data) => {
+        const { categories } = data;
+        setCategoriesList(categories);
+      });
+  };
+  useEffect(fetchPostCategories, []);
 
   /* fetch for add new post*/
   const fetchPostNewEl = (e) => {
@@ -151,7 +161,12 @@ export default function PostListPostPage(updatePosts) {
 
               {/* category select */}
               <div className="col-6">
+                <label htmlFor="inputCategory" className="form-label">
+                  Categoria
+                </label>
+
                 <select
+                  id="inputCategory"
                   className="form-select"
                   aria-label="Default select example"
                   value={formData.category}
@@ -160,7 +175,7 @@ export default function PostListPostPage(updatePosts) {
                 >
                   <option value=""> Open this select menu</option>
 
-                  {categories.map((category, index) => (
+                  {categoriesList.map((category, index) => (
                     <option key={index} value={category}>
                       {category}
                     </option>

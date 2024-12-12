@@ -8,6 +8,7 @@ import AboutUsPage from "./pages/AboutUsPage";
 import PostListIndexPage from "./pages/postList/PostListIndexPage";
 import PostListShowPage from "./pages/postList/PostListShowPage";
 import PostListPostPage from "./pages/postList/PostListPostPage";
+import NotFound from "./pages/notFound";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route Component={DefaultLayout}>
             <Route index Component={HomePage} />
             <Route path="/aboutUs" Component={AboutUsPage} />
+            <Route path="/notFound" Component={NotFound}></Route>
             <Route path="/postList">
               <Route index Component={PostListIndexPage} />
               <Route path=":id" Component={PostListShowPage} />
